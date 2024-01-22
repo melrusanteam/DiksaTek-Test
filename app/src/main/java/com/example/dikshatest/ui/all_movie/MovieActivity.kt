@@ -2,9 +2,14 @@ package com.example.dikshatest.ui.all_movie
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dikshatest.R
 import com.example.dikshatest.databinding.ActivityMovieBinding
+import com.example.dikshatest.ui.adapter.MovieAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -16,6 +21,7 @@ class MovieActivity : AppCompatActivity() {
 
     private val movieViewModels by viewModels<MovieViewModel>()
 
+    lateinit var adapter: MovieAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,26 +36,29 @@ class MovieActivity : AppCompatActivity() {
 
 
     fun initView() {
-
+        adapter = MovieAdapter()
         movieViewModels.getAllMovies()
     }
 
     fun bindViewModel() {
         movieViewModels.popularMovies.observe(this){
-            println("Success load movies ${it.size}")
+            adapter.updateMovies(it)
+            binding.rvMovie.apply {
+                adapter = this@MovieActivity.adapter
+                layoutManager = LinearLayoutManager(this@MovieActivity, LinearLayoutManager.VERTICAL, false)
+            }
         }
 
         movieViewModels.loadingMovies.observe(this){
             if(it)
-                println("loading")
+                binding.loadingMovies.visibility = View.VISIBLE
             else
-                println("close loading")
+                binding.loadingMovies.visibility = View.GONE
         }
 
 
         movieViewModels.errorLoadMovies.observe(this){
-            println("failed load movie")
-            println(it)
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }
 
 
