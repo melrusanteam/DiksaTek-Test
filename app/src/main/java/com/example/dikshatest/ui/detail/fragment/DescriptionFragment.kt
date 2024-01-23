@@ -53,6 +53,7 @@ class DescriptionFragment : Fragment() {
 
         detailViewModel.detailMovie.observe(viewLifecycleOwner) {
             binding.tvDescription.text = it.overview
+            binding.tvDescription2.text = it.overview
             val dataGenre = mutableListOf<String>()
             it.genres?.map {
                 dataGenre.add(it.name)

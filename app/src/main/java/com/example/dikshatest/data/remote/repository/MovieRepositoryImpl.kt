@@ -64,7 +64,7 @@ class MovieRepositoryImpl @Inject constructor(
                 if(response.isSuccessful){
                     emit(SuccessResult(response.body()))
                 } else{
-                    throw Exception("Failed to load detail")
+                    throw Exception("Failed load detail")
                 }
 
             } catch (e: Exception) {
@@ -84,7 +84,7 @@ class MovieRepositoryImpl @Inject constructor(
                 if(response.isSuccessful){
                     emit(SuccessResult(response.body()?.results))
                 } else{
-                    throw Exception("Failed to load review")
+                    throw Exception("Failed load review")
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -102,7 +102,7 @@ class MovieRepositoryImpl @Inject constructor(
                 if(response.isSuccessful){
                     emit(SuccessResult(response.body()?.results))
                 } else{
-                    throw Exception("Failed to load trailer")
+                    throw Exception("Failed load trailer")
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -118,7 +118,7 @@ class MovieRepositoryImpl @Inject constructor(
                 if(response.isSuccessful){
                     emit(SuccessResult(response.body()?.genres))
                 } else{
-                    throw Exception("Failed to load trailer")
+                    throw Exception("Failed load genre")
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
