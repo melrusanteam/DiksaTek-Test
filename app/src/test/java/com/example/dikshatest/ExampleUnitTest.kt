@@ -29,11 +29,14 @@ class ExampleUnitTest {
     @Mock
     lateinit var movieService: MovieService
 
+
+    val apiKey = "12345"
+
     lateinit var movieRepository: MovieRepository
 
     @Before
     fun setup() {
-        movieRepository = MovieRepositoryImpl(movieService)
+        movieRepository = MovieRepositoryImpl(movieService, apiKey)
     }
     @Test
     fun movieList() = runBlocking {
@@ -44,16 +47,18 @@ class ExampleUnitTest {
                 posterPath = "poster",
                 backdropPath = "backdrop",
                 voteAverage = 1.0,
-                voteCount = 1.2
+                voteCount = 1.2,
+                id = 1323
             )
         )))
-        `when`(movieService.popularMovie("123")).thenReturn(movieResponse)
+        `when`(movieService.popularMovie(1,"123")).thenReturn(movieResponse)
 
 
-        val response = movieService.popularMovie("123")
+        val response = movieService.popularMovie(1,"123")
 
         assertEquals(true, response.isSuccessful)
         assertEquals(1, response.body()?.page)
+        assertEquals(1, response.body()?.results?.size)
 
 
     }
