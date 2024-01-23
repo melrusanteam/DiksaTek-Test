@@ -22,3 +22,24 @@ jobs:
 
       - name: Test
         run: ./gradlew test
+
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Setup-Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+      - name: Build Apk Debug
+        run: ./gradlew assembleDebug
+
+      - name: Upload Apk
+        actions: actions/upload-artifact@v2
+        with:
+          name: app-debug
+          path: app/build/outputs/apk/debug/**
