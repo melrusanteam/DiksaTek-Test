@@ -5,6 +5,6 @@ import com.google.gson.annotations.SerializedName
 data class GenreResponse(
 
     @SerializedName("genres")
-    val genres: List<GenreModel>
+    val genres: List<GenreModel> = listOf()
 
 )

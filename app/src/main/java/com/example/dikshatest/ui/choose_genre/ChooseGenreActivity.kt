@@ -36,7 +36,7 @@ class ChooseGenreActivity : AppCompatActivity() {
     }
 
     fun initView(){
-        supportActionBar?.title = getString(R.string.label_select_genre)
+        initActionBar()
         chooseGenreViewModel.getListGenre()
         genreMovieAdapter = ChooseGenreAdapter(object: ChooseGenreAdapter.EventListener{
             override fun onClickItem(item: GenreModel) {
@@ -45,8 +45,11 @@ class ChooseGenreActivity : AppCompatActivity() {
                     .putExtra("genre", Gson().toJson(item)))
             }
         },)
+    }
 
-
+    private fun initActionBar(){
+        supportActionBar?.title = getString(R.string.label_select_genre)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
     fun bindViewModel() {

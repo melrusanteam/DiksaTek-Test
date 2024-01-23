@@ -11,5 +11,5 @@ data class ReviewResponse(
     val page: Int,
 
     @SerializedName("results")
-    val results: List<ReviewModel>
+    val results: List<ReviewModel> ?= listOf()
 )

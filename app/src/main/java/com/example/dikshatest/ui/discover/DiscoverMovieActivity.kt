@@ -40,8 +40,8 @@ class DiscoverMovieActivity : AppCompatActivity() {
 
 
     fun initView() {
+        initActionBar()
         val genreModel = Gson().fromJson(intent.getStringExtra("genre"), GenreModel::class.java)
-        supportActionBar?.title = genreModel.name
         movieAdapter = MovieAdapter(object: MovieAdapter.EventListener {
             override fun onClickItem(item: MovieModel) {
                 startActivity(
@@ -53,6 +53,11 @@ class DiscoverMovieActivity : AppCompatActivity() {
         })
 
         viewModel.onViewLoaded(genreModel)
+    }
+
+    private fun initActionBar(){
+        supportActionBar?.title = getString(R.string.label_select_genre)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
     fun bindViewModel() {

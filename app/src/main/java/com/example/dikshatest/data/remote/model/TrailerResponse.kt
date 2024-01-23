@@ -9,6 +9,6 @@ data class TrailerResponse (
     val id: Int,
 
     @SerializedName("results")
-    val results: List<TrailerModel>
+    val results: List<TrailerModel> ?= listOf()
 
 )
