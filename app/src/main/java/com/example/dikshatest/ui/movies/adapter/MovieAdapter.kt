@@ -28,6 +28,8 @@ class MovieAdapter(
         fun bind(item : MovieModel) {
             binding.tvTitle.text = item.title
             binding.tvVoteAverage.text = item.voteAverage.toString()
+            binding.tvReleaseDate.text = item.releaseDate
+
             val imageUrl = "${MovieConstant.imageBaseURL}${item.posterPath}"
             Glide.with(context)
                 .load(imageUrl)

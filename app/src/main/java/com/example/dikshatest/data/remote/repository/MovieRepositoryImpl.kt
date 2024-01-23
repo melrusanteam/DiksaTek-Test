@@ -5,6 +5,7 @@ import com.example.dikshatest.data.remote.apiservice.MovieService
 import com.example.dikshatest.data.remote.apiservice.NetworkResult
 import com.example.dikshatest.data.remote.apiservice.SuccessResult
 import com.example.dikshatest.data.remote.model.DetailResponse
+import com.example.dikshatest.data.remote.model.GenreModel
 import com.example.dikshatest.data.remote.model.MovieModel
 import com.example.dikshatest.data.remote.model.ReviewModel
 import com.example.dikshatest.data.remote.model.TrailerModel
@@ -39,6 +40,21 @@ class MovieRepositoryImpl @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
+    override suspend fun discoverMovie(page: Int, genreId: Int): Flow<NetworkResult<List<MovieModel>>> {
+        return flow {
+            try{
+                val data = movieService.discoverMovie(page, genreId,apiKey)
+                if(data.isSuccessful){
+                    emit(SuccessResult(data.body()?.results))
+                } else
+                    throw Exception("Failed load movies")
+
+            } catch (e: Exception){
+                e.printStackTrace()
+                emit(ErrorResult(e.message))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 
 
     override suspend fun detailMovie(movieId: String): Flow<NetworkResult<DetailResponse>> {
@@ -85,6 +101,22 @@ class MovieRepositoryImpl @Inject constructor(
                 val response = movieService.trailerMovie(movieId, apiKey)
                 if(response.isSuccessful){
                     emit(SuccessResult(response.body()?.results))
+                } else{
+                    throw Exception("Failed to load trailer")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                emit(ErrorResult(e.message))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getGenreMovie(): Flow<NetworkResult<List<GenreModel>>> {
+        return flow {
+            try {
+                val response = movieService.genreMovie(apiKey)
+                if(response.isSuccessful){
+                    emit(SuccessResult(response.body()?.genres))
                 } else{
                     throw Exception("Failed to load trailer")
                 }

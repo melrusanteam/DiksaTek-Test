@@ -1,6 +1,7 @@
 package com.example.dikshatest.data.remote.apiservice
 
 import com.example.dikshatest.data.remote.model.DetailResponse
+import com.example.dikshatest.data.remote.model.GenreResponse
 import com.example.dikshatest.data.remote.model.MovieResponse
 import com.example.dikshatest.data.remote.model.ReviewResponse
 import com.example.dikshatest.data.remote.model.TrailerResponse
@@ -17,7 +18,12 @@ interface MovieService {
         @Query("api_key") apiKey : String
     ): Response<MovieResponse>
 
-
+    @GET(MoviePath.discoverMovie)
+    suspend fun discoverMovie(
+        @Query("page") page: Int,
+        @Query("with_genres") genreId: Int,
+        @Query("api_key") apiKey : String
+    ): Response<MovieResponse>
 
     @GET(MoviePath.detailMovie)
     suspend fun detailMovie(
@@ -39,6 +45,11 @@ interface MovieService {
         @Query("api_key") apiKey: String
     ): Response<TrailerResponse>
 
+
+    @GET(MoviePath.listGenre)
+    suspend fun genreMovie(
+        @Query("api_key") apiKey: String
+    ): Response<GenreResponse>
 
 
 }

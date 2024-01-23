@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +24,8 @@
                 android:id="@+id/trailerMovie"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                app:layout_collapseMode="parallax" />
+                app:layout_collapseMode="parallax"
+                android:background="@color/black"/>
 
             <ImageButton
                 android:id="@+id/backButton"
@@ -50,17 +49,16 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
-        <!-- TabLayout -->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@android:color/holo_blue_dark"
+            app:tabIndicatorColor="@android:color/white"
             app:tabMode="fixed"
-            app:tabSelectedTextColor="@android:color/holo_blue_dark"
-            app:tabTextColor="@android:color/holo_blue_dark"
+            app:tabSelectedTextColor="@android:color/white"
+            app:tabTextColor="@android:color/white"
 
             />
 

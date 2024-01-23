@@ -49,9 +49,9 @@ class DescriptionFragment : Fragment() {
 
     }
 
-    fun bindViewModel(){
+    fun bindViewModel() {
 
-        detailViewModel.detailMovie.observe(viewLifecycleOwner){
+        detailViewModel.detailMovie.observe(viewLifecycleOwner) {
             binding.tvDescription.text = it.overview
             val dataGenre = mutableListOf<String>()
             it.genres.map {
@@ -60,8 +60,14 @@ class DescriptionFragment : Fragment() {
             genreAdapter.updateListGenre(dataGenre)
             binding.rvGenre.apply {
                 adapter = genreAdapter
-                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             }
+            binding.tvVote.text = it.voteAverage.toString()
+            binding.tvCount.text = it.voteCount.toString()
+            binding.tvPopularity.text = it.popularity.toString()
+            binding.tvBudget.text = it.budget.toString()
+            binding.tvRevenue.text = it.revenue.toString()
 
         }
     }

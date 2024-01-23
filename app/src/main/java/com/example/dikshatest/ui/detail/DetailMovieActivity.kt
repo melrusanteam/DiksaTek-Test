@@ -40,11 +40,6 @@ class DetailMovieActivity : AppCompatActivity() {
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.detail_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
 
     fun initView() {
         detailViewModel.onViewLoaded(intent.getIntExtra("movieId",0))
@@ -54,7 +49,6 @@ class DetailMovieActivity : AppCompatActivity() {
             when(position){
                 0 -> tab.text = "Description"
                 1 -> tab.text = "Review"
-                2 -> tab.text = "Others"
             }
         }.attach()
 
