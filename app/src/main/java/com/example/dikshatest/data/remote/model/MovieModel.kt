@@ -22,6 +22,9 @@ data class MovieModel(
     val voteCount: Double,
 
 
+    @SerializedName("id")
+    val id: Int,
+
 
 
 )

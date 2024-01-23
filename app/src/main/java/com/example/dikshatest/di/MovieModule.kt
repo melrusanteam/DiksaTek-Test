@@ -29,6 +29,14 @@ class MovieModule {
 
     @Provides
     @Singleton
+    @Named("api_key")
+    fun provideApiKey(): String {
+        return "e482f239c0b03ee604f193d5927beb63"
+    }
+
+
+    @Provides
+    @Singleton
     fun provideHttpLogging() : OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
@@ -58,8 +66,8 @@ class MovieModule {
 
     @Provides
     @Singleton
-    fun provideMovieRepository(apiService: MovieService) : MovieRepository {
-        return MovieRepositoryImpl(apiService)
+    fun provideMovieRepository(apiService: MovieService, @Named("api_key") apiKey: String) : MovieRepository {
+        return MovieRepositoryImpl(apiService, apiKey)
     }
 
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_16"
+    tools:context=".ui.detail.fragment.DescriptionFragment">
+
+
+    <TextView
+        android:id="@+id/labelOverview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_overview"
+        android:textSize="@dimen/text_16"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        />
+
+    
+    <TextView
+        android:id="@+id/labelGenre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_genre"
+        android:textSize="@dimen/text_16"
+        android:textStyle="bold"
+        />
+    
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvGenre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        />
+
+</LinearLayout>

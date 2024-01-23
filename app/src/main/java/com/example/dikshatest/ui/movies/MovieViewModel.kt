@@ -1,5 +1,6 @@
-package com.example.dikshatest.ui.all_movie
+package com.example.dikshatest.ui.movies
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +9,6 @@ import com.example.dikshatest.data.remote.apiservice.SuccessResult
 import com.example.dikshatest.data.remote.model.MovieModel
 import com.example.dikshatest.data.remote.repository.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,25 +18,33 @@ class MovieViewModel @Inject constructor(
     private val movieRepository: MovieRepository
 ): ViewModel(){
 
-    val popularMovies = MutableLiveData<List<MovieModel>>()
+    private val _allMovies = MutableLiveData<List<MovieModel>>()
+    val allMovies: LiveData<List<MovieModel>> get() = _allMovies
     val loadingMovies = MutableLiveData<Boolean>()
     val errorLoadMovies = MutableLiveData<String>()
 
+    var currentPage = 1
 
-    val apiKey = "e482f239c0b03ee604f193d5927beb63"
 
     fun getAllMovies() {
-        loadingMovies.postValue(true)
+        loadingMovies.value = true
         viewModelScope.launch {
-            movieRepository.popularMovies(apiKey).collect{
+            movieRepository.popularMovies(currentPage).collect{
                 when(it){
                     is ErrorResult -> {
-                        loadingMovies.postValue(false)
+                        loadingMovies.value = false
                         errorLoadMovies.postValue(it.message.orEmpty())
+
                     }
                     is SuccessResult -> {
-                        loadingMovies.postValue(false)
-                        popularMovies.postValue(it.data.orEmpty())
+                        loadingMovies.value = false
+                        val currentMovies = _allMovies.value.orEmpty().toMutableList()
+                        currentMovies.addAll(it.data.orEmpty())
+                        _allMovies.value = currentMovies
+                        println("current page $currentPage")
+                        currentPage++
+
+
                     }
                 }
 
