@@ -1,0 +1,33 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Build APK Testing"
+  lane :build_debug_apk do
+    gradle(
+        task: 'assembleDebug',
+        print_command: true
+    )
+
+
+    apk_directory = File.expand_path('apk')
+
+    sh("mkdir -p #{apk_directory}")
+    sh("cp /Users/jhoanrivers/JhoanPrivate/DikshaTest/app/build/outputs/apk/debug/app-debug.apk #{apk_directory}")
+  end
+
+end
