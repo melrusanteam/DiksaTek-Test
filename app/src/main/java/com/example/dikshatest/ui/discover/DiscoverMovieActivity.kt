@@ -3,10 +3,12 @@ package com.example.dikshatest.ui.discover
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.compose.ui.text.capitalize
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.dikshatest.R
 import com.example.dikshatest.data.remote.model.GenreModel
 import com.example.dikshatest.data.remote.model.MovieModel
@@ -40,8 +42,8 @@ class DiscoverMovieActivity : AppCompatActivity() {
 
 
     fun initView() {
-        initActionBar()
         val genreModel = Gson().fromJson(intent.getStringExtra("genre"), GenreModel::class.java)
+        initActionBar(genreModel)
         movieAdapter = MovieAdapter(object: MovieAdapter.EventListener {
             override fun onClickItem(item: MovieModel) {
                 startActivity(
@@ -55,9 +57,17 @@ class DiscoverMovieActivity : AppCompatActivity() {
         viewModel.onViewLoaded(genreModel)
     }
 
-    private fun initActionBar(){
-        supportActionBar?.title = getString(R.string.label_select_genre)
+    private fun initActionBar(genreModel: GenreModel){
+        supportActionBar?.title = genreModel.name
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     fun bindViewModel() {
@@ -103,6 +113,21 @@ class DiscoverMovieActivity : AppCompatActivity() {
     fun bindViewEvents() {
 
 
+        binding.rvMovie.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val totalItemCount = layoutManager.itemCount
+                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+
+                if (!viewModel.loadingMovies.value!! && lastVisibleItemPosition == totalItemCount - 1) {
+                    viewModel.loadMovies()
+                }
+            }
+
+        })
     }
 
 

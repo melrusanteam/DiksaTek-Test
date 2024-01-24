@@ -3,6 +3,7 @@ package com.example.dikshatest.ui.choose_genre
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dikshatest.R
@@ -49,7 +50,17 @@ class ChooseGenreActivity : AppCompatActivity() {
 
     private fun initActionBar(){
         supportActionBar?.title = getString(R.string.label_select_genre)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            android.R.id.home -> finish()
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     fun bindViewModel() {
