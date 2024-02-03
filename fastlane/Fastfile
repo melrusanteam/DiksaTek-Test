@@ -24,7 +24,7 @@ platform :android do
     )
 
 
-    apk_directory = File.expand_path('apk')
+    apk_directory = File.expand_path('/Users/jhoanrivers/JhoanPrivate/DikshaTest/apk')
 
     sh("mkdir -p #{apk_directory}")
     sh("cp /Users/jhoanrivers/JhoanPrivate/DikshaTest/app/build/outputs/apk/debug/app-debug.apk #{apk_directory}")

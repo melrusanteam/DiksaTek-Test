@@ -5,22 +5,22 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000569">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000533">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: assembleDebug" time="2.50011">
+      <testcase classname="fastlane.lanes" name="1: assembleDebug" time="29.23408">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: mkdir -p /Users/jhoanrivers/JhoanPrivate/DikshaTest/fastlane/apk" time="0.007329">
+      <testcase classname="fastlane.lanes" name="2: mkdir -p /Users/jhoanrivers/JhoanPrivate/DikshaTest/apk" time="0.00729">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: cp /Users/jhoanrivers/JhoanPrivate/DikshaTest/app/build/outputs/apk/debug/app-debug.apk /Users/jhoanrivers/JhoanPrivate/DikshaTest/fastlane/apk" time="0.028298">
+      <testcase classname="fastlane.lanes" name="3: cp /Users/jhoanrivers/JhoanPrivate/DikshaTest/app/build/outputs/apk/debug/app-debug.apk /Users/jhoanrivers/JhoanPrivate/DikshaTest/apk" time="0.027978">
         
       </testcase>
     
