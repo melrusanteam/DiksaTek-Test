@@ -82,14 +82,11 @@ class MovieActivity : AppCompatActivity() {
     }
 
     fun bindViewModel() {
+        binding.rvMovie.adapter = this@MovieActivity.adapter
+        binding.rvMovie.layoutManager = LinearLayoutManager(this@MovieActivity, LinearLayoutManager.VERTICAL, false)
         movieViewModels.allMovies.observe(this) {
             if (it.isNotEmpty()) {
                 adapter.updateMovies(it)
-                binding.rvMovie.apply {
-                    adapter = this@MovieActivity.adapter
-                    layoutManager =
-                        LinearLayoutManager(this@MovieActivity, LinearLayoutManager.VERTICAL, false)
-                }
             }
 
         }

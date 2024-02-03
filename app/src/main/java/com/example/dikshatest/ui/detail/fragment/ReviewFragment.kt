@@ -58,13 +58,13 @@ class ReviewFragment : Fragment() {
     }
 
     fun bindViewModel(){
-
+        binding.rvReview.adapter = reviewAdapter
+        binding.rvReview.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         detailViewModel.reviewMovie.observe(viewLifecycleOwner){
             if(it.isNotEmpty()){
                 reviewAdapter.updateReview(it)
                 binding.rvReview.apply {
-                    adapter = reviewAdapter
-                    layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
                     addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
                     addOnScrollListener(object: RecyclerView.OnScrollListener() {
 
